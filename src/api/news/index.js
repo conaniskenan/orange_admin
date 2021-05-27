@@ -1,0 +1,40 @@
+/*
+ * @Author: hypocrisy
+ * @Date: 2021-05-27 19:03:15
+ * @LastEditors: hypocrisy
+ * @LastEditTime: 2021-05-27 23:44:41
+ * @FilePath: /orange-admin/src/api/news/index.js
+ */
+/* eslint-disable */
+import { get, post, getp, postp } from '../index'
+
+export const getNewsBySearch = data => {
+	return post('/search', data)
+}
+export const getRandNews = () => {
+	return get('/rand')
+}
+export const getNewsById = index => {
+	return get(`/token/news/${index}`)
+}
+export const getModelNews = index => {
+	return get(`select/news/${index}`, { begin: 0, count: 10 })
+}
+export const updateNews = data => {
+	return post('/token/admin/news/update', data)
+}
+export const deleteNews = index => {
+	return post(`/token/admin/news/delete/${index}`)
+}
+export const getNewsPlate = () => {
+	return get('select/model')
+}
+export const addPlate = data => {
+	return post('/token/admin/model/insert', data)
+}
+export const removePlate = index => {
+	return post(`/token/admin/model/delete/${index}`)
+}
+export const updatePlate = data => {
+	return post(`/token/admin/model/update`, data)
+}

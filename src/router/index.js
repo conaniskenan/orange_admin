@@ -1,30 +1,63 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+/* eslint-disable prettier/prettier */
+/*
+ * @Author: hypocrisy
+ * @Date: 2021-05-27 16:58:12
+ * @LastEditors: hypocrisy
+ * @LastEditTime: 2021-05-27 22:09:14
+ * @FilePath: /orange-admin/src/router/index.js
+ */
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-];
+	{
+		path: '/',
+		name: 'Login',
+		component: () =>
+			import(/* webpackChunkName: "login" */ 'views/login'),
+	},
+	{
+		path: '/home',
+		name: 'Home',
+		component: () =>
+			import(/* webpackChunkName: "home" */ 'views/home'),
+
+		redirect: '/news',
+		children: [
+			{
+				path: '/news',
+				component: () =>
+					import(/* webpackChunkName: "news" */ 'views/news'),
+			},
+			{
+				path: '/users',
+				component: () =>
+					import(/* webpackChunkName: "news" */ 'views/users'),
+			},
+			{
+				path: '/models',
+				component: () =>
+					import(/* webpackChunkName: "news" */ 'views/model'),
+			},
+			{
+				path: '/comments',
+				component: () =>
+					import(/* webpackChunkName: "news" */ 'views/comment'),
+			},
+		],
+	},
+]
 
 const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
-});
-
-export default router;
+	mode: 'history',
+	base: process.env.BASE_URL,
+	routes,
+})
+router.beforeEach((to, from, next) => {
+	if (to.path === '/') return next()
+	if (!localStorage.getItem('token')) next('/')
+	next()
+})
+export default router
