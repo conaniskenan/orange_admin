@@ -2,8 +2,8 @@
  * @Author: hypocrisy
  * @Date: 2021-05-27 18:12:30
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-28 15:00:13
- * @FilePath: /orange-admin/src/views/Home.vue
+ * @LastEditTime: 2021-05-28 23:20:27
+ * @FilePath: /orange-admin/src/views/home.vue
 -->
 <template>
   <el-container class="header_container">
@@ -40,6 +40,18 @@
                 <span>新闻列表</span>
               </template>
             </el-menu-item>
+            <el-menu-item index="/write">
+              <template>
+                <i class="el-icon-s-grid"></i>
+                <span>写新闻</span>
+              </template>
+            </el-menu-item>
+            <el-menu-item index="/addnews">
+              <template>
+                <i class="el-icon-s-grid"></i>
+                <span>添加新闻</span>
+              </template>
+            </el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
@@ -61,7 +73,7 @@
             <el-menu-item index="/comments">
               <template>
                 <i class="el-icon-notebook-2"></i>
-                <span>评论列表</span>
+                <span>举报评论列表</span>
               </template>
             </el-menu-item>
           </el-submenu>
@@ -81,9 +93,7 @@
       </el-aside>
       <!-- 右侧 -->
       <el-main>
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>

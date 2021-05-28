@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-27 19:03:15
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-28 15:47:05
+ * @LastEditTime: 2021-05-28 23:44:28
  * @FilePath: /orange-admin/src/api/news/index.js
  */
 /* eslint-disable */
@@ -46,4 +46,13 @@ export const deleteReportComment = index => {
 }
 export const cancelReportComment = index => {
 	return post(`/token/admin/comment/cancel/${index}`)
+}
+export const uploadPhoto = data => {
+	return postp('/token/file/upload/picture', data)
+}
+export const uploadHtml = data => {
+	return postp('/token/file/upload/html', data)
+}
+export const uploadNews = data => {
+	return post('/token/admin/news/insert', data)
 }

@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-27 22:06:44
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-28 15:52:07
+ * @LastEditTime: 2021-05-28 15:55:51
  * @FilePath: /orange-admin/src/views/comment.vue
 -->
 
@@ -12,7 +12,7 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/news' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>评论管理</el-breadcrumb-item>
-      <el-breadcrumb-item>评论列表</el-breadcrumb-item>
+      <el-breadcrumb-item>举报评论列表</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card class="box-card">
       <el-row :gutter="10">

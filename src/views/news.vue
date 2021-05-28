@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-27 18:49:40
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-28 15:43:13
+ * @LastEditTime: 2021-05-28 23:11:24
  * @FilePath: /orange-admin/src/views/news.vue
 -->
 <template>
@@ -18,18 +18,6 @@
         <el-col :span="7">
           <!-- 搜索 -->
           <div class="grid-content bg-purple">
-            <!-- <el-input
-              v-model="searchData"
-              placeholder="请输入新闻标题进行搜索"
-              clearable
-              style="width: 380px"
-              @clear="search"
-              @change="search"
-              @click="search"
-              @input="search"
-            >
-              <el-button slot="append" icon="el-icon-search"></el-button>
-            </el-input> -->
             <el-select
               v-model="modelId"
               placeholder="请选择新闻分类"
@@ -45,11 +33,11 @@
           </div>
         </el-col>
         <el-col :span="4">
-          <div class="grid-content bg-purple">
+          <!-- <div class="grid-content bg-purple">
             <el-button type="primary" @click="addDialogVisible = true"
               >添加新闻</el-button
             >
-          </div>
+          </div> -->
         </el-col>
       </el-row>
       <!-- 主体列表 -->
@@ -111,45 +99,6 @@
         >></el-pagination
       >
     </el-card>
-    <!-- 弹出表单-添加 -->
-    <el-dialog
-      title="添加新闻"
-      :visible.sync="addDialogVisible"
-      width="35%"
-      @close="addDialogClosed"
-    >
-      <el-form
-        :model="addForm"
-        :rules="addFormRules"
-        ref="addFormRef"
-        label-width="100px"
-      >
-        <el-form-item label="标题" prop="title">
-          <el-input v-model="addForm.title"></el-input>
-        </el-form-item>
-        <el-form-item label="分类" required prop="category">
-          <el-select v-model="addForm.modelId" placeholder="请选择新闻分类">
-            <el-option
-              v-for="item in modelList"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="新闻内容" prop="content">
-          <el-input
-            type="textarea"
-            v-model="addForm.content"
-            :rows="6"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="addDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addNews">确 定</el-button>
-      </span>
-    </el-dialog>
     <!-- 弹出表单-编辑 -->
     <el-dialog
       title="编辑新闻"
@@ -323,28 +272,17 @@ export default {
       // this.loading = true
       getModelNews(this.modelId)
         .then((res) => {
-          this.newsList = res.list
+          if (res.list == null) {
+            this.newsList = []
+          } else {
+            this.newsList = res.list
+          }
           this.getFilterList()
           this.loading = false
         })
         .catch((error) => {
           console.log(error)
         })
-    },
-    addNews() {
-      this.$refs.addFormRef.validate((valid) => {
-        if (!valid) return
-        this.$http
-          .post('/admin/news', this.addForm)
-          .then(() => {
-            this.$message.success('添加新闻成功')
-            this.addDialogVisible = false
-            this.getNewsList()
-          })
-          .catch(() => {
-            this.$message.error('添加新闻失败')
-          })
-      })
     },
     showEditDialog(id) {
       getNewsById(id)
@@ -427,9 +365,6 @@ export default {
       this.page = 1
       this.getFilterList()
     },
-    addDialogClosed() {
-      this.$refs.addFormRef.resetFields()
-    },
     editDialogClosed() {
       this.$refs.editFormRef.resetFields()
     },
@@ -447,9 +382,7 @@ export default {
   updated() {}, //生命周期 - 更新之后
   beforeDestroy() {}, //生命周期 - 销毁之前
   destroyed() {}, //生命周期 - 销毁完成
-  activated() {
-    this.getNewsList()
-  }, //如果页面有keep-alive缓存功能，这个函数会触发
+  activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style lang='stylus' scoped>

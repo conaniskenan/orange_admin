@@ -3,7 +3,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-27 16:58:12
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-28 14:46:29
+ * @LastEditTime: 2021-05-28 22:54:54
  * @FilePath: /orange-admin/src/router/index.js
  */
 import Vue from 'vue'
@@ -23,7 +23,6 @@ const routes = [
 		name: 'Home',
 		component: () =>
 			import(/* webpackChunkName: "home" */ 'views/home'),
-
 		redirect: '/news',
 		children: [
 			{
@@ -32,19 +31,29 @@ const routes = [
 					import(/* webpackChunkName: "news" */ 'views/news'),
 			},
 			{
+				path: '/write',
+				component: () =>
+					import(/* webpackChunkName: "write" */ 'views/write'),
+			},
+			{
 				path: '/user',
 				component: () =>
-					import(/* webpackChunkName: "news" */ 'views/user'),
+					import(/* webpackChunkName: "user" */ 'views/user'),
+			},
+			{
+				path: '/addnews',
+				component: () =>
+					import(/* webpackChunkName: "add" */ 'views/addnews'),
 			},
 			{
 				path: '/models',
 				component: () =>
-					import(/* webpackChunkName: "news" */ 'views/model'),
+					import(/* webpackChunkName: "models" */ 'views/model'),
 			},
 			{
 				path: '/comments',
 				component: () =>
-					import(/* webpackChunkName: "news" */ 'views/comment'),
+					import(/* webpackChunkName: "comments" */ 'views/comment'),
 			},
 		],
 	},
