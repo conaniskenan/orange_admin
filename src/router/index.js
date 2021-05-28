@@ -3,7 +3,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-27 16:58:12
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-27 22:09:14
+ * @LastEditTime: 2021-05-28 14:46:29
  * @FilePath: /orange-admin/src/router/index.js
  */
 import Vue from 'vue'
@@ -32,9 +32,9 @@ const routes = [
 					import(/* webpackChunkName: "news" */ 'views/news'),
 			},
 			{
-				path: '/users',
+				path: '/user',
 				component: () =>
-					import(/* webpackChunkName: "news" */ 'views/users'),
+					import(/* webpackChunkName: "news" */ 'views/user'),
 			},
 			{
 				path: '/models',

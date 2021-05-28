@@ -2,8 +2,8 @@
  * @Author: hypocrisy
  * @Date: 2021-05-27 21:22:19
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-27 22:47:09
- * @FilePath: /orange-admin/src/views/users.vue
+ * @LastEditTime: 2021-05-28 15:44:00
+ * @FilePath: /orange-admin/src/views/user.vue
 -->
 <template>
   <div>
@@ -124,7 +124,7 @@ export default {
       getUser()
         .then((res) => {
           this.loading = false
-          this.userList = res.list
+          this.userList = [...res.list]
           this.getFilterList()
         })
         .catch((error) => {
@@ -138,7 +138,9 @@ export default {
       )
       //过滤分页
       list.forEach((item) => {
-        item.lastLoginTime = getTime(item.lastLoginTime)
+        if (item.lastLoginTime.toString().length === 10) {
+          item.lastLoginTime = getTime(item.lastLoginTime)
+        }
       })
       this.filterList = list.filter(
         (item, index) =>
@@ -162,20 +164,18 @@ export default {
     },
   },
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {
+  created() {},
+  //生命周期 - 挂载完成（可以访问DOM元素）
+  mounted() {
     this.getUserList()
   },
-  //生命周期 - 挂载完成（可以访问DOM元素）
-  mounted() {},
   beforeCreate() {}, //生命周期 - 创建之前
   beforeMount() {}, //生命周期 - 挂载之前
   beforeUpdate() {}, //生命周期 - 更新之前
   updated() {}, //生命周期 - 更新之后
   beforeDestroy() {}, //生命周期 - 销毁之前
   destroyed() {}, //生命周期 - 销毁完成
-  activated() {
-    this.getUserList()
-  }, //如果页面有keep-alive缓存功能，这个函数会触发
+  activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style lang='stylus' scoped>

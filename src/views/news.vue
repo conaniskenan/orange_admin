@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-27 18:49:40
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-27 23:52:08
+ * @LastEditTime: 2021-05-28 15:43:13
  * @FilePath: /orange-admin/src/views/news.vue
 -->
 <template>
@@ -404,7 +404,9 @@ export default {
         return item.title.toLowerCase().includes(this.searchData.toLowerCase())
       })
       list.forEach((item) => {
-        item.createTime = getTime(item.createTime)
+        if (item.createTime.toString().length === 10) {
+          item.createTime = getTime(item.createTime)
+        }
       })
       this.filterList = list.filter(
         (item, index) =>

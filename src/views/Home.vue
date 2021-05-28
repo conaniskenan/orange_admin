@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-27 18:12:30
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-27 22:07:18
+ * @LastEditTime: 2021-05-28 15:00:13
  * @FilePath: /orange-admin/src/views/Home.vue
 -->
 <template>
@@ -46,7 +46,7 @@
               <i class="el-icon-user"></i>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="/users" prefix-icon="el-icon-search">
+            <el-menu-item index="/user">
               <template>
                 <i class="el-icon-user-solid"></i>
                 <span>用户列表</span>
@@ -117,8 +117,8 @@ export default {
   //方法集合
   methods: {
     logout() {
-      localStorage.clear()
-      this.$router.replace('/index')
+      localStorage.removeItem('token')
+      this.$router.replace('/')
     },
     handleToggle() {
       this.isCollapse = !this.isCollapse
