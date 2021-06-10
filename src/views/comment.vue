@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-27 22:06:44
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-28 15:55:51
+ * @LastEditTime: 2021-06-10 13:15:07
  * @FilePath: /orange-admin/src/views/comment.vue
 -->
 
@@ -203,7 +203,7 @@ export default {
         type: 'warning',
       })
         .then(() => {
-          deleteReportComment(id)
+          cancelReportComment(id)
             .then(() => {
               this.$message.success('取消举报评论成功')
               this.getReportList()
