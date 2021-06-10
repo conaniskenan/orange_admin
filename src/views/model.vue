@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-27 22:06:37
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-27 23:34:47
+ * @LastEditTime: 2021-06-10 14:16:05
  * @FilePath: /orange-admin/src/views/model.vue
 -->
 
@@ -70,7 +70,7 @@
               type="primary"
               icon="el-icon-edit"
               size="mini"
-              @click="showEditDialog(scope.row.id)"
+              @click="showEditDialog(scope.row.id, scope.row.name)"
             ></el-button>
             <el-button
               type="danger"
@@ -197,6 +197,10 @@ export default {
       this.getFilterList()
     },
     addModel() {
+      if (/^\s*$/.test(this.addForm.name)) {
+        this.$message.error('模块名不允许')
+        return
+      }
       addPlate(this.addForm)
         .then(() => {
           this.$message.success('添加模块成功')
@@ -204,7 +208,7 @@ export default {
           this.getModelList()
         })
         .catch(() => {
-          this.$message.error('添加新闻失败')
+          this.$message.error('添加模块失败')
         })
     },
     editModel() {
@@ -218,9 +222,11 @@ export default {
           this.$message.error('修改模块失败')
         })
     },
-    showEditDialog(id) {
+    showEditDialog(id, name) {
       this.editDialogVisible = true
-      this.editForm.id = id
+      // this.editForm.id = id
+      // this.editForm.name = name
+      this.editForm = { name, id }
     },
     removeModelById(id) {
       this.$confirm('此操作将永久删除该模块, 是否继续?', '提示', {
